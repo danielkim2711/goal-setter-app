@@ -75,9 +75,9 @@ const loginUser = asyncHandler(async (req, res) => {
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
   const user = {
-    id: req.user._id,
-    email: req.user.email,
+    _id: req.user._id,
     name: req.user.name,
+    email: req.user.email,
   };
   res.status(200).json(user);
 });
