@@ -11,6 +11,20 @@ const getGoals = asyncHandler(async (req, res) => {
   res.status(200).json(goals);
 });
 
+// @desc    Get user's goal
+// @route   GET /api/goals/:id
+// @access  Private
+const getGoal = asyncHandler(async (req, res) => {
+  const goal = await Goal.findById(req.params.id);
+
+  if (goal.user.toString() !== req.user._id.toString()) {
+    res.status(401);
+    throw new Error('Not Authorised');
+  }
+
+  res.status(200).json(goal);
+});
+
 // @desc    Set user's goal
 // @route   POST /api/goals
 // @access  Private
@@ -66,6 +80,7 @@ const deleteGoal = asyncHandler(async (req, res) => {
 
 module.exports = {
   getGoals,
+  getGoal,
   setGoal,
   updateGoal,
   deleteGoal,
