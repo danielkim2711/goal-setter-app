@@ -54,7 +54,12 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    reset: () => initialState,
+    reset: (state) => {
+      state.isError = false;
+      state.isSuccess = false;
+      state.isLoading = false;
+      state.message = '';
+    },
   },
   extraReducers: (builder) => {
     builder
