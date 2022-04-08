@@ -17,6 +17,12 @@ const getGoals = asyncHandler(async (req, res) => {
 const getGoal = asyncHandler(async (req, res) => {
   const goal = await Goal.findById(req.params.id);
 
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
   // Check the logged in user matches the goal user
   if (goal.user.toString() !== req.user._id.toString()) {
     res.status(401);
@@ -56,6 +62,12 @@ const updateGoal = asyncHandler(async (req, res) => {
     throw new Error('Goal not found');
   }
 
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
   // Check the logged in user matches the goal user
   if (goal.user.toString() !== req.user._id.toString()) {
     res.status(401);
@@ -78,6 +90,12 @@ const deleteGoal = asyncHandler(async (req, res) => {
   if (!goal) {
     res.status(400);
     throw new Error('Goal not found');
+  }
+
+  // Check for user
+  if (!req.user) {
+    res.status(401);
+    throw new Error('User not found');
   }
 
   // Check the logged in user matches the goal user
