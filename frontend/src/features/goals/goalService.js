@@ -2,6 +2,19 @@ import axios from 'axios';
 
 const API_URL = '/api/goals/';
 
-const authService = {};
+const createGoal = async (goal, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post(API_URL, goal, config);
 
-export default authService;
+  return response.data;
+};
+
+const goalService = {
+  createGoal,
+};
+
+export default goalService;

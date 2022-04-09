@@ -5,7 +5,6 @@ const port = process.env.PORT || 8000;
 const errorHandler = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 
-// Connect to DB
 connectDB();
 
 const app = express();
