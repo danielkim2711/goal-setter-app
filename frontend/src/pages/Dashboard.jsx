@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getGoals, reset } from '../features/goals/goalSlice';
+import { toast } from 'react-toastify';
 import GoalForm from '../components/GoalForm';
 import GoalItem from '../components/GoalItem';
 import Spinner from '../components/Spinner';
@@ -17,7 +18,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      toast.error(message);
     }
 
     if (!user) {
@@ -38,7 +39,10 @@ const Dashboard = () => {
   return (
     <>
       <section className='heading'>
-        <h1>Welcome {user && user.name}</h1>
+        <h1>
+          Welcome{' '}
+          {user && user.name.charAt(0).toUpperCase() + user.name.slice(1)}!
+        </h1>
         <p>Goals Dashboard</p>
       </section>
 
